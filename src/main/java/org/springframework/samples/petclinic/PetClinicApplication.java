@@ -16,9 +16,13 @@
 
 package org.springframework.samples.petclinic;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.samples.petclinic.factura.Factura;
+import org.springframework.samples.petclinic.factura.FacturaRepository;
 
 /**
  * PetClinic Spring Boot Application.
@@ -34,4 +38,17 @@ public class PetClinicApplication {
 		SpringApplication.run(PetClinicApplication.class, args);
 	}
 
+	@Bean
+	public CommandLineRunner demoFactRepository(FacturaRepository facturaRepository) {
+		return (args) -> {
+			System.out.println("Lista de facturas: ");
+
+			for(Factura f: facturaRepository.findAll()) {
+				System.out.println("Factura: " + f);
+			}
+		};
+	}
 }
+
+
+
